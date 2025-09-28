@@ -119,12 +119,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Aplicar tema inicial
-        applyTheme(isDark);
-        updateThemeIcon(isDark);
-        
         // Crear botón de toggle
         const themeToggle = createThemeToggle();
         document.body.prepend(themeToggle);
+
+        // Aplicar tema inicial
+        applyTheme(isDark);
+        updateThemeIcon(isDark);
         
         // Event listener para toggle
         themeToggle.addEventListener('click', () => {
@@ -149,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const themeToggle = document.createElement('button');
         themeToggle.className = 'theme-toggle';
         themeToggle.title = 'Cambiar tema';
-        updateThemeIcon(false); // Inicial light
+        // No llamar a updateThemeIcon aquí, se hará en initThemeManager con el tema correcto
         return themeToggle;
     }
     
