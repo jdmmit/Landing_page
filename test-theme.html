@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Theme Toggle</title>
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #10b981;
+            --accent-color: #f59e0b;
+            --text-primary: #1f2937;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #f3f4f6;
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            --transition-normal: 0.3s ease-in-out;
+            --font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            transition: all var(--transition-normal);
+        }
+
+        .dark-theme {
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+            --bg-primary: #111827;
+            --bg-secondary: #1f2937;
+            --bg-tertiary: #374151;
+        }
+
+        .dark-theme .theme-toggle {
+            background: var(--accent-color);
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            z-index: 1000;
+            transition: all var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .test-content {
+            padding: 100px 20px 20px;
+            text-align: center;
+        }
+
+        .test-card {
+            background: var(--bg-primary);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--bg-tertiary);
+            transition: all var(--transition-normal);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-content">
+        <h1>Test del Botón Theme Toggle</h1>
+        <div class="test-card">
+            <h2>Modo Actual: <span id="current-mode">Claro</span></h2>
+            <p>Este es un test para verificar que el botón del theme toggle funciona correctamente.</p>
+            <p>Haz clic en el botón 🌙/☀️ en la esquina superior derecha para cambiar entre modo claro y oscuro.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark-theme');
+            updateThemeIcon();
+            updateModeText();
+        }
+
+        function updateThemeIcon() {
+            const themeToggle = document.querySelector('.theme-toggle');
+            const isDark = document.documentElement.classList.contains('dark-theme');
+            themeToggle.innerHTML = isDark ? '☀️' : '🌙';
+        }
+
+        function updateModeText() {
+            const modeText = document.getElementById('current-mode');
+            const isDark = document.documentElement.classList.contains('dark-theme');
+            modeText.textContent = isDark ? 'Oscuro' : 'Claro';
+        }
+
+        // Crear botón theme toggle
+        function createThemeToggle() {
+            const themeToggle = document.createElement('button');
+            themeToggle.innerHTML = '🌙';
+            themeToggle.className = 'theme-toggle';
+            themeToggle.title = 'Cambiar tema';
+            themeToggle.addEventListener('click', toggleTheme);
+            document.body.appendChild(themeToggle);
+        }
+
+        // Inicializar
+        createThemeToggle();
+        updateModeText();
+    </script>
+</body>
+</html>
